@@ -1,3 +1,3 @@
 # Dockerfile
 FROM alpine:latest
-CMD echo "Hello, this is the change to check the pipeline 070925!"
+CMD echo "Hello, this is the changes post new workflows 070925!"

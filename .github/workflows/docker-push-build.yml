@@ -1,0 +1,28 @@
+name: Docker Build and Push # name of the workflow
+
+on:
+  push:
+    branches:
+      - main # trigger on pushes to the main branch
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest # github codespaces 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3 # checkout the repository
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2 # log in to Docker Hub
+        with:
+          username: ${{ secrets.DOCKER_USERNAME}} # use secret for Docker username
+          password: ${{ secrets.DOCKER_PASSWORD}} # use secret for Docker password
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME}}/my-repo-name:latest .
+        # build the Docker image with a tag
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME}}/my-repo-name:latest
+
+
